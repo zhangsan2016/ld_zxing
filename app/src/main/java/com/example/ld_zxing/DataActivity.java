@@ -22,6 +22,7 @@ public class DataActivity extends Activity {
 
     private Gson gson = new Gson();
     private  List<String> datalist;
+    private  ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class DataActivity extends Activity {
         strJson = (String) SharedPreferencesUtils.getParam(DataActivity.this,"data",strJson);
         datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(DataActivity.this,android.R.layout.simple_list_item_1,datalist);
+        adapter = new ArrayAdapter(DataActivity.this,android.R.layout.simple_list_item_1,datalist);
         if(datalist!= null && datalist.size() > 0){
             listView.setAdapter(adapter);
         }else{
@@ -71,12 +72,12 @@ public class DataActivity extends Activity {
     }
 
     private void deliteListData(int position) {
-        String strJson = (String) SharedPreferencesUtils.getParam(DataActivity.this,"data",new String());
-        List<String> datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
+        /*String strJson = (String) SharedPreferencesUtils.getParam(DataActivity.this,"data",new String());
+        List<String> datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());*/
         datalist.remove(position);
 
-            SharedPreferencesUtils.setParam(DataActivity.this,"data",gson.toJson(datalist));
-
+        SharedPreferencesUtils.setParam(DataActivity.this,"data",gson.toJson(datalist));
+        adapter.notifyDataSetChanged();
 
             Toast.makeText(DataActivity.this,"删除成功！",Toast.LENGTH_SHORT).show();
 
