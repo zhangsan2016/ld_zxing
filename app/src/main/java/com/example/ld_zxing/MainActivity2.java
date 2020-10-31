@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
     private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;
 
     private ZXingView mZXingView;
+    private TextView tvlistsize;
   //  private File file =  new File(getFilesDir().getAbsolutePath(), "二维码扫描数据.xls");
 
     @Override
@@ -50,6 +52,7 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        tvlistsize = findViewById(R.id.tv_listsize);
         mZXingView = findViewById(R.id.zxingview);
         mZXingView.setDelegate(this);
 
@@ -75,12 +78,23 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
     protected void onStart() {
         super.onStart();
 
+        String strJson = (String) SharedPreferencesUtils.getParam(MainActivity2.this,"data",new String());
+        List<String>  datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
+        if(datalist != null){
+            setListSize(datalist.size());
+        }else{
+            setListSize(0);
+        }
+
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         openQrcodeScan();
+
     }
 
     /**
@@ -143,6 +157,7 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
             System.out.println("xxxxxxxxxxxxxxxxx datalist = " + datalist.get(0) + "leng() = " + datalist.size());
             Toast.makeText(MainActivity2.this,"添加成功！",Toast.LENGTH_SHORT).show();
             mZXingView.startSpot(); // 开始识别
+            setListSize(data.size());
             return;
         }
 
@@ -162,6 +177,10 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
 
 
         mZXingView.startSpot(); // 开始识别
+    }
+
+    private void setListSize(int size) {
+        tvlistsize.setText(size+"");
     }
 
 
