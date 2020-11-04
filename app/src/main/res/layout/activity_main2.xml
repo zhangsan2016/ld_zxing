@@ -68,10 +68,10 @@
         android:id="@+id/tv_listsize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:textColor="#FFFFFFFF"
-        android:layout_marginRight="10dp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginRight="20dp"
+        android:textSize="36sp"
         android:text="0"></TextView>
 
 

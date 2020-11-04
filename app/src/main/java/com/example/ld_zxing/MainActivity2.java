@@ -4,23 +4,21 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
+import com.example.ld_zxing.util.CustomToast;
 import com.example.ld_zxing.util.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -119,7 +117,7 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
     @Override
     public void onScanQRCodeSuccess(String result) {
         Log.i(TAG, "result:" + result);
-        setTitle("扫描结果为：" + result);
+        // setTitle("扫描结果为：" + result);
        // Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
 
     /*   if(data.contains(result)){
@@ -144,6 +142,11 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
         data.clear();
         data = datalist;
 
+        try {
+            Thread.currentThread().sleep(200);//毫秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         if(data==null){
             data = new ArrayList<>();
@@ -155,9 +158,12 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
             datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
 
             System.out.println("xxxxxxxxxxxxxxxxx datalist = " + datalist.get(0) + "leng() = " + datalist.size());
-            Toast.makeText(MainActivity2.this,"添加成功！",Toast.LENGTH_SHORT).show();
-            mZXingView.startSpot(); // 开始识别
+         //   Toast.makeText(MainActivity2.this,"添加成功！",Toast.LENGTH_SHORT).show();
+           // showToastTop("添加成功！",Toast.LENGTH_LONG);
+            CustomToast.showToast(this,"添加成功！",1000);
+
             setListSize(data.size());
+            mZXingView.startSpot(); // 开始识别
             return;
         }
 
@@ -170,14 +176,46 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
             datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
 
             System.out.println("xxxxxxxxxxxxxxxxx datalist = " + datalist.get(0) + "leng() = " + datalist.size());
-            Toast.makeText(MainActivity2.this,"添加成功！",Toast.LENGTH_SHORT).show();
+       //     Toast.makeText(MainActivity2.this,"添加成功！",Toast.LENGTH_LONG).show();
+          //  showToastTop("添加成功！",Toast.LENGTH_LONG);
+            CustomToast.showToast(this,"添加成功！",1000);
         }else{
-            Toast.makeText(MainActivity2.this,"当前数据已经保存，不再次保存！！",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity2.this,"当前数据已经保存，不再次保存！！",Toast.LENGTH_SHORT).show();
+            // showToastTop("当前数据已经保存，不再次保存！！",Toast.LENGTH_SHORT);
+            CustomToast.showToast(this,"当前数据已经保存",1000);
+
+        }
+
+        String strJson2 = (String) SharedPreferencesUtils.getParam(MainActivity2.this,"data",new String());
+        List<String>  datalist2 = gson.fromJson(strJson2, new TypeToken<List<String>>() {}.getType());
+        if(datalist2 != null){
+            setListSize(datalist2.size());
+        }else{
+            setListSize(0);
         }
 
 
         mZXingView.startSpot(); // 开始识别
+
+/*        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                this.s
+            }
+        }).start();*/
+
     }
+
+
+ private void  showToastTop(String str, int length){
+      Display display = getWindowManager().getDefaultDisplay();
+      // 获取屏幕高度
+      int height = display.getHeight();
+      Toast toast = Toast.makeText(this, str,length);
+      // 这里给了一个1/4屏幕高度的y轴偏移量
+      toast.setGravity(Gravity.TOP, 0, 50);
+      toast.show();
+  }
 
     private void setListSize(int size) {
         tvlistsize.setText(size+"");
