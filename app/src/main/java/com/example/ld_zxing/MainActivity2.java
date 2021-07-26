@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.ailiwean.core.Result;
+import com.ailiwean.core.view.style1.NBZxingView;
 import com.example.ld_zxing.util.CustomToast;
 import com.example.ld_zxing.util.SharedPreferencesUtils;
 import com.google.gson.Gson;
@@ -69,6 +71,8 @@ public class MainActivity2 extends Activity implements QRCodeView.Delegate {
             e.printStackTrace();
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx createXML() 出错" + e.getMessage().toString());
         }
+
+
 
     }
 

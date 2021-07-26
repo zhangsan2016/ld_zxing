@@ -1,2 +1,5 @@
-include ':app'
+include ':myapplication'
+include ':module_grayscale'
+include ':app'  , ':module_camera'
+
 rootProject.name = "ld_zxing"
