@@ -132,7 +132,7 @@ abstract class BaseCameraView @JvmOverloads constructor(
             return
         }
         if (Utils.checkPermissionCamera(context) && !isCameraOpened) {
-            openCameraBefore()
+           // openCameraBefore()
             openCamera(if (cameraStartTime != 0L) cameraStartTime else 100L)
         }
     }
