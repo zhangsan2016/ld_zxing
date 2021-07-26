@@ -22,12 +22,14 @@ public class MainActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
 
 
-        NBZxingView NBZxingView = new NBZxingView(this) {
+       /* NBZxingView NBZxingView = new NBZxingView(this) {
             @Override
             public void resultBack(Result content) {
                 Toast.makeText(getContext(), content.getText(), Toast.LENGTH_LONG).show();
             }
         };
+        NBZxingView.synchLifeStart(this);*/
+
 
 
         ZxingFragment fragment = new  ZxingFragment();

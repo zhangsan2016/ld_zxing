@@ -11,7 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ailiwean.core.Result;
+import com.ailiwean.core.helper.VibrateHelper;
 import com.ailiwean.core.view.style1.NBZxingView;
+import com.ailiwean.core.zxing.ScanTypeConfig;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +28,57 @@ public class ZxingFragment extends Fragment {
             @Override
             public void resultBack(@NotNull Result content) {
                 Toast.makeText(getContext(), content.getText(), Toast.LENGTH_LONG).show();
+               // NBZxingView.unProscibeCamera();
+               /* new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(5000);
+                            mainHand.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    unProscibeCamera();
+                                }
+                            });
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();*/
+
+
+                unProscibeCamera();
             }
+
+
+
+          /*  *//***
+             * 扫码成功后的一些动作
+             *//*
+            private fun scanSucHelper() {
+
+                //关闭相机
+                onCameraPause()
+
+                //清理线程池任务缓存
+                ableCollect?.clear()
+
+                //关闭扫码条动画
+                scanBarView?.stopScanAnimator()
+
+                //播放音频
+                VibrateHelper.playVibrate()
+
+                //震动
+                VibrateHelper.playBeep()
+
+            }*/
+
+
+
+
+
         };
         return NBZxingView;
     }
