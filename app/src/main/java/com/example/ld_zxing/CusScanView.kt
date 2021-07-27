@@ -17,8 +17,6 @@ import java.util.*
 class CusScanView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, def: Int = 0) : NBZxingView(context, attributeSet, def) {
 
 
-    var gson = Gson()
-    var data: List<String> = ArrayList()
     override fun resultBack(content: Result) {
        // Toast.makeText(context, content.text, Toast.LENGTH_LONG).show()
        // unProscibeCamera()
