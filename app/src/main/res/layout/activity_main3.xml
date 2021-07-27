@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
 
     <!--  <com.android.NBZxing.CusScanView
@@ -10,14 +11,20 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent" />-->
 
-    <com.example.ld_zxing.CusScanView
-        android:id="@+id/zxingview"
+
+    <FrameLayout
+        android:id="@+id/parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <com.example.ld_zxing.CusScanView
+            android:id="@+id/zxingview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include layout="@layout/tool_title" />
+
+    </FrameLayout>
 
 
-    <include layout="@layout/tool_title" />
-
-
-
-</FrameLayout>
+</LinearLayout>

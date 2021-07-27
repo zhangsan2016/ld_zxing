@@ -16,6 +16,7 @@ class CusScanView @JvmOverloads constructor(context: Context, attributeSet: Attr
 
     override fun resultBack(content: Result) {
         Toast.makeText(context, content.text, Toast.LENGTH_LONG).show()
+        unProscibeCamera()
     }
 
     /***

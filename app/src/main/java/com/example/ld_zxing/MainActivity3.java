@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ailiwean.core.Result;
@@ -45,9 +46,25 @@ public class MainActivity3 extends AppCompatActivity {
         NBZxingView.synchLifeStart(this);*/
 
 
-        ZxingFragment fragment = new ZxingFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.parent, fragment).commit();
+       /* ZxingFragment fragment = new ZxingFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.parent, fragment).commit();*/
 
+        CusScanView cusScanView =  this.findViewById(R.id.zxingview);
+        cusScanView.synchLifeStart(this);
+
+        initView();
+
+
+    }
+
+    private void initView() {
+        ImageView imageView = this.findViewById(R.id.vLeftImage);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

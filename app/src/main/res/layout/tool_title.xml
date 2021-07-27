@@ -50,7 +50,7 @@
             android:maxWidth="280dp"
             android:singleLine="true"
             android:textColor="#FFFFFF"
-            android:text="xxxxxxxxxxx"
+            android:text="清空"
             android:textSize="17sp" />
 
         <TextView
