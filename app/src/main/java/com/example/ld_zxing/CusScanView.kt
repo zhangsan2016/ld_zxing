@@ -1,4 +1,4 @@
-package com.android.NBZxing
+package com.example.ld_zxing
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,14 +9,10 @@ import com.ailiwean.core.zxing.ScanTypeConfig
 import com.google.android.cameraview.AspectRatio
 
 
-/**
- * @Package:        com.android.NBZXing
- * @ClassName:      CusZxing
- * @Description:
- * @Author:         SWY
- * @CreateDate:     2020/4/30 4:06 PM
- */
+
 class CusScanView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, def: Int = 0) : NBZxingView(context, attributeSet, def) {
+
+
 
     override fun resultBack(content: Result) {
         Toast.makeText(context, content.text, Toast.LENGTH_LONG).show()

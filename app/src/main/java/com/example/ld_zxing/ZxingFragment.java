@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ZxingFragment extends Fragment {
 
-    private NBZxingView NBZxingView;
+    private com.ailiwean.core.view.style1.NBZxingView NBZxingView;
 
     @Nullable
     @Override
@@ -29,6 +29,8 @@ public class ZxingFragment extends Fragment {
                 Toast.makeText(getContext(), content.getText(), Toast.LENGTH_LONG).show();
                 unProscibeCamera();
             }
+
+
         };
         return NBZxingView;
     }
