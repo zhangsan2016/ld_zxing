@@ -82,4 +82,9 @@ public class MainActivity3 extends AppCompatActivity {
     }
 
 
+    public void writeText(View view) {
+    }
+
+    public void dataList(View view) {
+    }
 }
