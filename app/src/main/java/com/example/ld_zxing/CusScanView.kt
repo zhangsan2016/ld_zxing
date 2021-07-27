@@ -6,17 +6,23 @@ import android.widget.Toast
 import com.ailiwean.core.Result
 import com.ailiwean.core.view.style1.NBZxingView
 import com.ailiwean.core.zxing.ScanTypeConfig
+import com.example.ld_zxing.util.CustomToast
+import com.example.ld_zxing.util.SharedPreferencesUtils
 import com.google.android.cameraview.AspectRatio
-
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.*
 
 
 class CusScanView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, def: Int = 0) : NBZxingView(context, attributeSet, def) {
 
 
-
+    var gson = Gson()
+    var data: List<String> = ArrayList()
     override fun resultBack(content: Result) {
-        Toast.makeText(context, content.text, Toast.LENGTH_LONG).show()
-        unProscibeCamera()
+       // Toast.makeText(context, content.text, Toast.LENGTH_LONG).show()
+       // unProscibeCamera()
+        this.mListen?.scanResult(content.text)
     }
 
     /***
@@ -45,12 +51,20 @@ class CusScanView @JvmOverloads constructor(context: Context, attributeSet: Attr
         else Toast.makeText(context, content.text, Toast.LENGTH_SHORT).show()
     }
 
-
     /***
      *  是否支持黑边二维码扫描
      */
     override fun isSupportBlackEdgeQrScan(): Boolean {
         return true
+    }
+
+    lateinit var mListen: MyInterface
+    fun setListeren(listen: MyInterface){
+        this.mListen = listen
+    }
+
+    interface MyInterface {
+        fun scanResult(content: String)
     }
 
 }
