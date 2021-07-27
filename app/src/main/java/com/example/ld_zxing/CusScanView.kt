@@ -6,12 +6,9 @@ import android.widget.Toast
 import com.ailiwean.core.Result
 import com.ailiwean.core.view.style1.NBZxingView
 import com.ailiwean.core.zxing.ScanTypeConfig
-import com.example.ld_zxing.util.CustomToast
-import com.example.ld_zxing.util.SharedPreferencesUtils
 import com.google.android.cameraview.AspectRatio
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.util.*
+import com.google.android.cameraview.R
+
 
 
 class CusScanView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, def: Int = 0) : NBZxingView(context, attributeSet, def) {
@@ -56,6 +53,13 @@ class CusScanView @JvmOverloads constructor(context: Context, attributeSet: Attr
         return true
     }
 
+    override fun provideFloorView(): Int {
+        return R.layout.nbzxing_style3_floorview
+    }
+
+    /**
+     *  添加监听
+     */
     lateinit var mListen: MyInterface
     fun setListeren(listen: MyInterface){
         this.mListen = listen
