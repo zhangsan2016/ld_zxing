@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -78,8 +80,19 @@ public class MainActivity3 extends AppCompatActivity {
 
         initView();
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        String strJson = (String) SharedPreferencesUtils.getParam(MainActivity3.this,"data",new String());
+        List<String>  datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
+        if(datalist != null){
+            setListSize(datalist.size());
+        }else{
+            setListSize(0);
+        }
 
     }
 
@@ -131,7 +144,7 @@ public class MainActivity3 extends AppCompatActivity {
         cusScanView.setListeren(new CusScanView.MyInterface() {
             @Override
             public void scanResult(@NotNull String content) {
-                Toast.makeText(MainActivity3.this, content, Toast.LENGTH_LONG).show();
+              //  Toast.makeText(MainActivity3.this, content, Toast.LENGTH_LONG).show();
 
                 String strJson = (String) SharedPreferencesUtils.getParam(MainActivity3.this,"data",new String());
                 List<String> datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
@@ -254,5 +267,30 @@ public class MainActivity3 extends AppCompatActivity {
     public void dataList(View view) {
         Intent intent = new Intent(this, DataActivity.class);
         startActivity(intent);
+    }
+
+    public void clear(View view) {
+
+        AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(this);
+        alertdialogbuilder.setMessage("您是否确认清空列表？");
+        alertdialogbuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String strJson = (String) SharedPreferencesUtils.getParam(MainActivity3.this,"data",new String());
+                List<String>  datalist = gson.fromJson(strJson, new TypeToken<List<String>>() {}.getType());
+                if(datalist != null){
+                    datalist.clear();
+                    SharedPreferencesUtils.setParam(MainActivity3.this,"data", gson.toJson(datalist));
+                    setListSize(datalist.size());
+                }else{
+                    setListSize(0);
+                }
+
+            }
+        });
+        alertdialogbuilder.setNeutralButton("取消", null);
+        final AlertDialog alertdialog1 = alertdialogbuilder.create();
+        alertdialog1.show();
     }
 }

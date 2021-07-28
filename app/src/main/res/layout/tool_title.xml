@@ -53,6 +53,7 @@
             android:textSize="17sp" />
 
         <TextView
+            android:onClick="clear"
             android:id="@+id/vRightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
